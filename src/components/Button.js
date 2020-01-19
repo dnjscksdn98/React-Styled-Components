@@ -20,6 +20,51 @@ const colorStyles = css`
   }}
 `;
 
+// create a size object to delete repeated lines
+const sizes = {
+  large: {
+    height: "3rem",
+    fontSize: "1.25rem"
+  },
+  medium: {
+    height: "2.25rem",
+    fontSize: "1rem"
+  },
+  small: {
+    height: "1.75rem",
+    fontSize: "0.875rem"
+  }
+};
+
+const sizeStyles = css`
+  /* size */
+  /* ${props => {
+    props.size === "large" &&
+      css`
+        height: 3rem;
+        font-size: 1.25rem;
+      `;
+  }}
+  ${props => {
+    props.size === "medium" &&
+      css`
+        height: 2.25rem;
+        font-size: 1rem;
+      `;
+  }}
+  ${props => {
+    props.size === "small" &&
+      css`
+        height: 1.75rem;
+        font-size: 0.875rem;
+      `;
+  }} */
+  ${({ size }) => css`
+    height: ${sizes[size].height};
+    font-size: ${sizes[size].fontSize};
+  `}
+`;
+
 // styled-component : it's possible to put an element inside an element and '&' like sass
 const StyledButton = styled.button`
   /* common style */
@@ -33,13 +78,9 @@ const StyledButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
 
-  /* size */
-  height: 2.25rem;
-  font-size: 1rem;
-
-  /* color */
-  /* bring colorStyles function */
+  /* bring Styles function */
   ${colorStyles}
+  ${sizeStyles}
 
   /* others */
   & + & {
@@ -47,16 +88,17 @@ const StyledButton = styled.button`
   }
 `;
 
-function Button({ children, color, ...rest }) {
+function Button({ children, color, size, ...rest }) {
   return (
-    <StyledButton color={color} {...rest}>
+    <StyledButton color={color} size={size} {...rest}>
       {children}
     </StyledButton>
   );
 }
 
 Button.defaultProps = {
-  color: "blue"
+  color: "blue",
+  size: "medium"
 };
 
 export default Button;
