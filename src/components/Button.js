@@ -1,5 +1,24 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { darken, lighten } from "polished";
+
+// separate the color styles from the main style
+const colorStyles = css`
+  /* color */
+  /* polished library */
+  ${({ theme, color }) => {
+    const selectedColor = theme.palette[color];
+    return css`
+      background: ${selectedColor};
+      &:hover {
+        background: ${lighten(0.1, selectedColor)};
+      }
+      &:active {
+        background: ${darken(0.1, selectedColor)};
+      }
+    `;
+  }}
+`;
 
 // styled-component : it's possible to put an element inside an element and '&' like sass
 const StyledButton = styled.button`
@@ -19,13 +38,8 @@ const StyledButton = styled.button`
   font-size: 1rem;
 
   /* color */
-  background: #228be6;
-  &:hover {
-    background: #339af0;
-  }
-  &:active {
-    background: #1c7ed6;
-  }
+  /* bring colorStyles function */
+  ${colorStyles}
 
   /* others */
   & + & {
@@ -33,8 +47,16 @@ const StyledButton = styled.button`
   }
 `;
 
-function Button({ children, ...rest }) {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+function Button({ children, color, ...rest }) {
+  return (
+    <StyledButton color={color} {...rest}>
+      {children}
+    </StyledButton>
+  );
 }
+
+Button.defaultProps = {
+  color: "blue"
+};
 
 export default Button;
