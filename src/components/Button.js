@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { darken, lighten } from "polished";
 
 // separate the color styles from the main style
-const colorStyles = css`
+const colorStyle = css`
   /* color */
   /* polished library */
   ${({ theme, color }) => {
@@ -16,6 +16,17 @@ const colorStyles = css`
       &:active {
         background: ${darken(0.1, selectedColor)};
       }
+      ${props =>
+        props.outline &&
+        css`
+          color: ${selectedColor};
+          background: none;
+          border: 1px solid ${selectedColor};
+          &:hover {
+            background: ${selectedColor};
+            color: white;
+          }
+        `}
     `;
   }}
 `;
@@ -36,7 +47,7 @@ const sizes = {
   }
 };
 
-const sizeStyles = css`
+const sizeStyle = css`
   /* size */
   /* ${props => {
     props.size === "large" &&
@@ -65,6 +76,19 @@ const sizeStyles = css`
   `}
 `;
 
+const fullWidthStyle = css`
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+      justify-content: center;
+      & + & {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    `}
+`;
+
 // styled-component : it's possible to put an element inside an element and '&' like sass
 const StyledButton = styled.button`
   /* common style */
@@ -78,19 +102,26 @@ const StyledButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
 
-  /* bring Styles function */
-  ${colorStyles}
-  ${sizeStyles}
-
   /* others */
   & + & {
     margin-left: 1rem;
   }
+
+  /* bring Styles function */
+  ${colorStyle}
+  ${sizeStyle}
+  ${fullWidthStyle}
 `;
 
-function Button({ children, color, size, ...rest }) {
+function Button({ children, color, size, outline, fullWidth, ...rest }) {
   return (
-    <StyledButton color={color} size={size} {...rest}>
+    <StyledButton
+      color={color}
+      size={size}
+      outline={outline}
+      fullWidth={fullWidth}
+      {...rest}
+    >
       {children}
     </StyledButton>
   );
