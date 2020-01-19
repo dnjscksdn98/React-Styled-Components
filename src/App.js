@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled, { css } from "styled-components";
+import Button from "./components/Button";
+
+// const Circle = styled.div`
+//   width: 5rem;
+//   height: 5rem;
+//   background: ${props => props.color};
+//   border-radius: 50%;
+
+//   /* it's impossible to use another props inside so add css if necessary */
+//   ${props =>
+//     props.huge &&
+//     css`
+//       width: 10rem;
+//       height: 10rem;
+//     `}
+// `;
+
+const AppBlock = styled.div`
+  width: 512px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  border: 1px solid black;
+  padding: 1rem;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppBlock>
+      <Button>BUTTON</Button>
+    </AppBlock>
   );
 }
 
