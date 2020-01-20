@@ -9,7 +9,7 @@ import Dialog from "./components/Dialog";
 //   background: ${props => props.color};
 //   border-radius: 50%;
 
-//   /* it's impossible to use another props inside so add css if necessary */
+//   /* it's impossible to use another props inside so add 'css' if necessary */
 //   ${props =>
 //     props.huge &&
 //     css`

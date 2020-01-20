@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes, css } from "styled-components"; // in styled-components, keyframes must be imported if necassary
+import styled, { keyframes, css } from "styled-components"; // in styled-components, keyframes must be imported if necessary
 
 import Button from "./Button";
 
@@ -118,8 +118,9 @@ function Dialog({
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
 
+  // visible true -> false
+  // close dialog
   useEffect(() => {
-    // visible true -> false
     if (localVisible && !visible) {
       setAnimate(true);
       setTimeout(() => setAnimate(false), 250);
